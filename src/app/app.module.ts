@@ -4,11 +4,16 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { AppComponent } from './app.component';
+import { ApplicationsComponent } from './applications/applications.component';
+import { MonitorsComponent } from './monitors/monitors.component';
+import { MongodbService } from './shared/mongodb.service';
+
+require('../bootstrap.css');
 
 @NgModule({
   declarations: [
-    AppComponent
+    ApplicationsComponent,
+    MonitorsComponent
   ],
   imports: [
     BrowserModule,
@@ -16,7 +21,7 @@ import { AppComponent } from './app.component';
     HttpModule,
     NgbModule.forRoot()
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [MongodbService],
+  bootstrap: [ApplicationsComponent]
 })
 export class AppModule { }

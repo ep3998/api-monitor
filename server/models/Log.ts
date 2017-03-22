@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
     Application = require('./Application').Application,
     Request = require('./Request').Request,
     Environment = require('./Environment').Environment,
-    RequestAssertion = require('./RequestAssertion').RequestAssertion,
+    RequestRule = require('./RequestRule').RequestRule,
     Response = require('./Response').Response;
 
 var LogSchema = new mongoose.Schema({
@@ -15,10 +15,10 @@ var LogSchema = new mongoose.Schema({
     isSuccess: { type: Boolean },
     startDate: { type: Number },
     endDate: { type: Number },
-    errors: {
-        assertion: RequestAssertion.schema,
+    errors: [{
+        assertion: RequestRule.schema,
         value: { type: String }
-    },
+    }],
     response: Response.schema
 });
 

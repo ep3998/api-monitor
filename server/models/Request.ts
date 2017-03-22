@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var RequestAssertion = require('./RequestAssertion').RequestAssertion;
+var RequestRule = require('./RequestRule').RequestRule;
 
 var RequestSchema = new mongoose.Schema({
     path: String,
@@ -22,7 +22,7 @@ var RequestSchema = new mongoose.Schema({
         clientId: { type: String },
         clientSecret: { type: String }
     },
-    assertions: [RequestAssertion.schema]
+    rules: [RequestRule.schema]
 });
 
 var Request = mongoose.model('Request', RequestSchema);
