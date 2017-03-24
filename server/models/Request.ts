@@ -1,7 +1,9 @@
-var mongoose = require('mongoose');
-var RequestRule = require('./RequestRule').RequestRule;
+import mongoose = require('mongoose');
+import { RequestRule } from './RequestRule';
 
-var RequestSchema = new mongoose.Schema({
+import { IRequest } from '../interfaces/IRequest';
+
+const _schema: mongoose.Schema = new mongoose.Schema({
     path: String,
     method: String,
     isSSL: Boolean,
@@ -25,8 +27,36 @@ var RequestSchema = new mongoose.Schema({
     rules: [RequestRule.schema]
 });
 
-var Request = mongoose.model('Request', RequestSchema);
+type RequestType = IRequest & mongoose.Document;
 
-module.exports = {
-    Request: Request
-};
+const _model = mongoose.model<RequestType>('Request', _schema);
+
+export class Request {
+    static model = _model;
+    static schema = _model.schema;
+
+    static find(filters): Promise<Array<IRequest>> {
+        return new Promise<Array<IRequest>>((resolve, reject) => {
+            _model.find(filters, (err, apps) => {
+                err ? reject(err) : resolve(apps);
+            });
+        });
+    }
+
+    static create(body): Promise<Array<IRequest>> {
+        return new Promise<Array<IRequest>>((resolve, reject) => {
+            _model.create(body, (err, app) => {
+                err ? reject(err) : resolve(app);
+            });
+        });
+    }
+
+    static remove(filters): Promise<Array<IRequest>> {
+        return new Promise<string>((resolve, reject) => {
+            console.log('Input filterss - ', filters);
+            _model.find(filters).remove((err, res) => {
+                err ? reject(err) : resolve(res);
+            });
+        });
+    }
+}

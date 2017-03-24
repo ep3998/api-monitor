@@ -1,17 +1,39 @@
 /**
  * Created by ep399 on 3/19/2017.
  */
-var mongoose = require('mongoose');
 
-var RequestRuleSchema = new mongoose.Schema({
+import mongoose = require('mongoose');
+
+import { IRequestRule } from '../interfaces/IRequestRule';
+
+const _schema: mongoose.Schema = new mongoose.Schema({
     source: {type: String},
     property: {type: String},
     operator: {type: String},
     value: {type: String}
 });
 
-var RequestRule = mongoose.model('RequestRule', RequestRuleSchema);
+type RequestRuleType = IRequestRule & mongoose.Document;
 
-module.exports = {
-    RequestRule: RequestRule
-};
+const _model = mongoose.model<RequestRuleType>('RequestRule', _schema);
+
+export class RequestRule {
+    static model = _model;
+    static schema = _model.schema;
+
+    static find(filters): Promise<Array<IRequestRule>> {
+        return new Promise<Array<IRequestRule>>((resolve, reject) => {
+            _model.find(filters, (err, apps) => {
+                err ? reject(err) : resolve(apps);
+            });
+        });
+    }
+
+    static create(body): Promise<Array<IRequestRule>> {
+        return new Promise<Array<IRequestRule>>((resolve, reject) => {
+            _model.create(body, (err, app) => {
+                err ? reject(err) : resolve(app);
+            });
+        });
+    }
+}

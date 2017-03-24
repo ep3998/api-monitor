@@ -1,11 +1,15 @@
 /**
  * Created by ep399 on 3/19/2017.
  */
-var mongoose = require('mongoose'),
-    Request = require('./Request').Request,
-    Notification = require ('./Notification').Notification;
 
-var MonitorSchema = new mongoose.Schema({
+import mongoose = require('mongoose');
+import { Request } from './Request';
+import { Notification } from './Notification';
+
+import { IMonitor } from '../interfaces/IMonitor';
+
+const _schema = new mongoose.Schema({
+    name: { type: String },
     request: Request.schema,
     delay: { type: Number },
     rules: [{
@@ -15,8 +19,27 @@ var MonitorSchema = new mongoose.Schema({
     }]
 });
 
-var Monitor = mongoose.model('Monitor', MonitorSchema);
+type MonitorType = IMonitor & mongoose.Document;
 
-module.exports = {
-    Monitor: Monitor
-};
+const _model = mongoose.model<MonitorType>('Monitor', _schema);
+
+export class Monitor {
+    static model = _model;
+    static schema = _model.schema;
+
+    static find(filters): Promise<Array<MonitorType>> {
+        return new Promise<Array<MonitorType>>((resolve, reject) => {
+            _model.find(filters, (err, apps) => {
+                err ? reject(err) : resolve(apps);
+            });
+        });
+    }
+
+    static create(body): Promise<Array<MonitorType>> {
+        return new Promise<Array<MonitorType>>((resolve, reject) => {
+            _model.create(body, (err, app) => {
+                err ? reject(err) : resolve(app);
+            });
+        });
+    }
+}

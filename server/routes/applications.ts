@@ -10,14 +10,14 @@ export class ApplicationRouter {
     getRouter(): express.Router {
         /* GET home page. */
         this.router.get('/', (req: express.Request, res: express.Response, next: express.NextFunction) => {
-            const filter = {};
-            for (const i in req.params) {
-                if (req.params.hasOwnProperty(i)) {
-                    filter[i] = req.params(i);
+            const filters = {};
+            for (const i in req.query) {
+                if (req.query.hasOwnProperty(i)) {
+                    filters[i] = req.query[i];
                 }
             }
-            console.log('ApplicationRouter get');
-            Application.get(filter).then(apps => {
+
+            Application.find(filters).then(apps => {
                 return res.json(apps);
             }).catch(err => {
                 return next(err);
@@ -32,16 +32,24 @@ export class ApplicationRouter {
             });
         });
 
+        this.router.delete('/', (req: express.Request, res: express.Response, next: express.NextFunction) => {
+            const filters = {};
+            for (const i in req.query) {
+                if (req.query.hasOwnProperty(i)) {
+                    filters[i] = req.query[i];
+                }
+            }
+
+            Application.remove(filters).then(apps => {
+                return res.json(apps);
+            }).catch(err => {
+                return next(err);
+            });
+        });
+
         return this.router;
     }
-    //
-    // router.post('/', function(req, res, next){
-    //     Application.create(req.body, function(err, app){
-    //         if(err) return next(err);
-    //         res.json(app);
-    //     });
-    // });
-    //
+
     // router.delete('/', function(req, res, next){
     //     var filter = {};
     //     for(var i in req.params){

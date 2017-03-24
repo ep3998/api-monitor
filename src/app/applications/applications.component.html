@@ -18,4 +18,7 @@
       </ul>
     </div>
   </div>
+  <div *ngIf="applications != null && applications.length < 3">
+    <p>Not many applications - want to add more? </p>
+  </div>
 </div>

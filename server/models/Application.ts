@@ -2,15 +2,15 @@
  * Created by ep399 on 3/19/2017.
  */
 import mongoose = require('mongoose');
-// import Environment = require('./Environment').Environment;
-// import Monitor = require('./Monitor').Monitor;
+import { Environment } from './Environment';
+import { Monitor } from './Monitor';
 
 import { IApplication } from '../interfaces/IApplication';
 
 const _schema: mongoose.Schema = new mongoose.Schema({
     name: { type: String, index: true },
-    // environments: [Environment.schema],
-    // monitors: [Monitor.schema]
+    environments: [Environment.schema],
+    monitors: [Monitor.schema]
 });
 
 type ApplicationType = IApplication & mongoose.Document;
@@ -18,40 +18,36 @@ type ApplicationType = IApplication & mongoose.Document;
 const _model = mongoose.model<ApplicationType>('Application', _schema);
 
 export class Application {
-    static get(filters): Promise<Array<IApplication>> {
-        console.log('In Application');
+    static model = _model;
+    static schema = _model.schema;
+
+    static find(filters): Promise<Array<IApplication>> {
         return new Promise<Array<IApplication>> ((resolve, reject) => {
-           _model.find((err, apps) => {
+           _model.find(filters, (err, apps) => {
                err ? reject(err) : resolve(apps);
            });
         });
     }
 
     static create(body): Promise<Array<IApplication>> {
-        console.log('In Application');
         return new Promise<Array<IApplication>> ((resolve, reject) => {
             _model.create(body, (err, app) => {
                 err ? reject(err) : resolve(app);
             });
         });
     }
-    // router.get('/', function(req, res, next) {
-    //     const filter = {};
-    //     for(var i in req.params){
-    //         filter[i] = req.params(i);
-    //     }
-    //
-    //     Application.find(filter, function(err, apps){
-    //         if(err) return next(err);
-    //         res.json(apps);
-    //     });
-    // });
-    //     router.post('/', function(req, res, next){
-    //     Application.create(req.body, function(err, app){
-    //         if(err) return next(err);
-    //         res.json(app);
-    //     });
-    // });
+
+    static remove(filters): Promise<Array<IApplication>> {
+        return new Promise<string> ((resolve, reject) => {
+            console.log('Input filterss - ', filters);
+            // _model.remove(filters, (err, res) => {
+            //     err ? reject(err) : resolve(res);
+            // });
+            _model.find(filters).remove((err, res) => {
+                err ? reject(err) : resolve(res);
+            });
+        });
+    }
     //
     //     router.delete('/', function(req, res, next){
     //     var filter = {};
