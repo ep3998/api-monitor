@@ -8,17 +8,17 @@ import { IRequestRule } from './IRequestRule';
 import { IResponse } from './IResponse';
 
 interface RuleResult {
-    rule: IRequestRule;
-    value: string;
+    rule?: IRequestRule;
+    value?: string;
 }
 
 export interface ILog {
-    application: IApplication;
-    request: IRequest;
-    environment: IEnvironment;
-    isSuccess: boolean;
-    startDate: number;
-    endDate: number;
-    errors: Array<RuleResult>;
-    response: IResponse;
+    application?: IApplication;
+    request?: IRequest;
+    environment?: IEnvironment;
+    isSuccess?: boolean;
+    startDate?: number;
+    endDate?: number;
+    errors?: Array<RuleResult>;
+    response?: IResponse;
 }

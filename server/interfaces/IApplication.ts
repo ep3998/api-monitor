@@ -5,7 +5,7 @@ import { IEnvironment } from './IEnvironment';
 import { IMonitor } from './IMonitor';
 
 export interface IApplication {
-    _id: string;
+    _id?: string;
     name: string;
     environment?: Array<IEnvironment>;
     monitors?: Array<IMonitor>;

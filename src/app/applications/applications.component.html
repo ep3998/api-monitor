@@ -11,14 +11,42 @@
   </div>
   <div class="row">
     <div class="col">
-      <ul>
-        <li *ngFor="let app of applications">
-          {{app.name}}
-        </li>
-      </ul>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Monitors</th>
+            <th>Latest Issue</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr (click)="onAppClick(app)" *ngFor="let app of applications">
+            <td>{{app.name}}</td>
+            <td>Green</td>
+            <td>{{app.monitors.length}}/{{app.monitors.length}} active</td>
+            <td>No latest issue</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
-  <div *ngIf="applications != null && applications.length < 3">
+  <div *ngIf="applications != null && applications.length < 10" class="row">
     <p>Not many applications - want to add more? </p>
   </div>
+  <div class="row">
+    <p><strong>Add New Application:</strong></p>
+  </div>
+  <div class="row">
+    <form>
+      <div class="form-group row">
+        <label for="inputAppName" class="col-2 col-form-label">Name</label>
+        <div class="col-10">
+          <input type="text" class="form-control" id="inputAppName" placeholder="Application Name"
+            #newApp (keyup.enter)="addApplication(newApp.value); newApp.value=''"/>
+        </div>
+      </div>
+    </form>
+  </div>
+
 </div>

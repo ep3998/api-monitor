@@ -19,12 +19,12 @@ interface Authentication {
 }
 
 export interface IRequest {
-    path: string;
-    method: string;
-    isSSL: boolean;
-    headers: Array<KeyPair>;
-    parameters: Array<KeyPair>;
-    body: string;
-    authentication: Authentication;
-    rules: Array<IRequestRule>;
+    path?: string;
+    method?: string;
+    isSSL?: boolean;
+    headers?: Array<KeyPair>;
+    parameters?: Array<KeyPair>;
+    body?: string;
+    authentication?: Authentication;
+    rules?: Array<IRequestRule>;
 }

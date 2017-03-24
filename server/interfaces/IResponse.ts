@@ -3,13 +3,13 @@
  */
 interface KeyPair {
     name: string;
-    value: string;
+    value?: string;
 }
 
 export interface IResponse {
-    body: string;
-    headers: Array<KeyPair>;
-    status: number;
-    message: string;
-    duration: number;
+    body?: string;
+    headers?: Array<KeyPair>;
+    status?: number;
+    message?: string;
+    duration?: number;
 }
