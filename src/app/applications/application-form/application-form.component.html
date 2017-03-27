@@ -1,0 +1,17 @@
+<h1>Hero Form</h1>
+<form (ngSubmit)="onSubmit(name)" #appForm="ngForm">
+  <div class="form-group">
+    <label for="name">Application Name</label>
+    <input type="text" class="form-control" id="name"
+           required
+            [(ngModel)]="model.name" name="name"
+            #spy
+            #name="ngModel">
+    <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Name is required</div>
+    Remove this: {{spy.className}}
+  </div>
+  <button type="submit" class="btn btn-success" [disabled]="appForm.form.valid == false">Submit</button>
+  <button type="button" class="btn btn-default" (click)="appForm.reset()">Reset Form</button>
+  Current Model: {{diagnostic}}
+</form>
+

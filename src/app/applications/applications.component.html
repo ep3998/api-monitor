@@ -31,22 +31,26 @@
       </table>
     </div>
   </div>
-  <div *ngIf="applications != null && applications.length < 10" class="row">
+  <div *ngIf="applications?.length < 10" class="row">
     <p>Not many applications - want to add more? </p>
   </div>
   <div class="row">
     <p><strong>Add New Application:</strong></p>
   </div>
   <div class="row">
-    <form>
-      <div class="form-group row">
-        <label for="inputAppName" class="col-2 col-form-label">Name</label>
-        <div class="col-10">
-          <input type="text" class="form-control" id="inputAppName" placeholder="Application Name"
-            #newApp (keyup.enter)="addApplication(newApp.value); newApp.value=''"/>
-        </div>
-      </div>
-    </form>
+    <app-application-form></app-application-form>
   </div>
+
+  <!--<div class="row">-->
+    <!--<form>-->
+      <!--<div class="form-group row">-->
+        <!--<label for="inputAppName" class="col-2 col-form-label">Name</label>-->
+        <!--<div class="col-10">-->
+          <!--<input type="text" class="form-control" id="inputAppName" placeholder="Application Name"-->
+            <!--#newApp (keyup.enter)="addApplication(newApp.value); newApp.value=''"/>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</form>-->
+  <!--</div>-->
 
 </div>

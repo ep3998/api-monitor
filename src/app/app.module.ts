@@ -7,13 +7,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ApplicationsComponent } from './applications/applications.component';
 import { MonitorsComponent } from './monitors/monitors.component';
 import { MongodbService } from './shared/mongodb.service';
+import { ApplicationFormComponent } from './applications/application-form/application-form.component';
 
 require('../bootstrap.css');
 
 @NgModule({
   declarations: [
     ApplicationsComponent,
-    MonitorsComponent
+    MonitorsComponent,
+    ApplicationFormComponent
   ],
   imports: [
     BrowserModule,
