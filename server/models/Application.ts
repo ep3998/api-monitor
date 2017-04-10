@@ -39,7 +39,7 @@ export class Application {
 
     static remove(filters): Promise<Array<IApplication>> {
         return new Promise<string> ((resolve, reject) => {
-            console.log('Input filterss - ', filters);
+            console.log('Input filters - ', filters);
             // _model.remove(filters, (err, res) => {
             //     err ? reject(err) : resolve(res);
             // });

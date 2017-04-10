@@ -36,19 +36,4 @@ export class ApplicationsComponent implements OnInit {
   onAppClick(selApp) {
     this.currApp = selApp;
   }
-
-  addApplication(appName) {
-    const newApp: IApplication = {
-      name: appName
-    };
-
-    // Add to database
-    // this.db.addApplication(newApp)
-    //     .subscribe(apps => this.applications.push(apps),
-    //                 error => this.errorMessage = <any>error);
-
-    this.db.addApplication(newApp)
-        .subscribe(apps => this.refreshApplications(),
-                    error => this.errorMessage = <any>error);
-  }
 }

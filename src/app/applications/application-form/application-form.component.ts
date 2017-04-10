@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MongodbService } from '../../shared/mongodb.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { IApplication } from '../../../../server/interfaces/IApplication';
 
@@ -9,31 +10,25 @@ import { IApplication } from '../../../../server/interfaces/IApplication';
   styleUrls: ['./application-form.component.css']
 })
 export class ApplicationFormComponent implements OnInit {
-  model: IApplication = {
-    _id: '',
-    name: '',
-    environment: null,
-    monitors: null
-  };
-
+  app: FormGroup;
   submitted = false;
   errorMessage;
 
-  constructor(private db: MongodbService) { }
+  constructor(private db: MongodbService, private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.app = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(2)]]
+    });
   }
 
-  onSubmit(appName) {
-    const newApp: IApplication = {
-      name: appName
-    };
+  onSubmit(newApp: IApplication) {
 
     this.db.addApplication(newApp)
         .subscribe(apps => this.submitted = true,
             error => this.errorMessage = <any>error);
   }
 
-  get diagnostic() { return JSON.stringify(this.model); }
+  get diagnostic() { return JSON.stringify(this.app.value); }
 
 }
