@@ -41,6 +41,7 @@
     "@ng-bootstrap/ng-bootstrap": "^1.0.0-alpha.21",
     "body-parser": "~1.13.2",
     "bootstrap": "^4.0.0-alpha.6",
+    "font-awesome": "^4.7.0",
     "cookie-parser": "^1.4.3",
     "core-js": "^2.4.1",
     "debug": "~2.2.0",
@@ -68,6 +69,7 @@
     "angular2-template-loader": "^0.5.0",
     "awesome-typescript-loader": "^2.2.4",
     "codelyzer": "~2.0.0-beta.1",
+    "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.8.5",
@@ -91,6 +93,7 @@
     "ts-node": "1.2.1",
     "tslint": "^4.3.0",
     "typescript": "~2.0.3",
+    "url-loader": "^0.5.8",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.2",
     "webpack-merge": "^4.1.0"

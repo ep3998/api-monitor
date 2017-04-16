@@ -8,14 +8,16 @@ import { ApplicationsComponent } from './applications/applications.component';
 import { MonitorsComponent } from './monitors/monitors.component';
 import { MongodbService } from './shared/mongodb.service';
 import { ApplicationFormComponent } from './applications/application-form/application-form.component';
-
-require('../bootstrap.css');
+import { ApplicationFormEnvComponent } from './applications/application-form/application-form-env/application-form-env.component';
+import { ApplicationFormMonitorComponent } from './applications/application-form/application-form-monitor/application-form-monitor.component';
 
 @NgModule({
   declarations: [
     ApplicationsComponent,
     MonitorsComponent,
-    ApplicationFormComponent
+    ApplicationFormComponent,
+    ApplicationFormEnvComponent,
+    ApplicationFormMonitorComponent
   ],
   imports: [
     BrowserModule,

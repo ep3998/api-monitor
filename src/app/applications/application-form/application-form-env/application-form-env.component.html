@@ -1,0 +1,13 @@
+<div [formGroup]="environmentForm">
+  <div class="form-group m-0">
+    <label for="envName">Name</label>
+    <input type="text" class="form-control" id="envName" formControlName="name">
+    <small [hidden]="environmentForm.controls.name.valid" class="text-danger">
+      Name is required
+    </small>
+  </div>
+  <div class="form-group m-0">
+    <label for="baseURL">Base URL</label>
+    <input type="text" class="form-control" id="baseURL" formControlName="baseURL">
+  </div>
+</div>
